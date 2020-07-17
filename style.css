@@ -1,0 +1,30 @@
+#highscore-link{
+  text-align: left;
+}
+
+#count-clock{
+  display: block;
+  float: right;
+  margin-right: 2%;
+}
+
+
+
+.col{
+  float: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#start-card{
+  display: block;
+  text-align: center;
+}
+
+#question-card{
+  display: none;
+}
+
+#question-card p{
+  text-align: left;
+}

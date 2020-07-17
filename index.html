@@ -12,16 +12,35 @@
   <body>
     <header>
       <a id="highscore-link" href="highscores.html">Click to see High Scores</a>
-      <p>Time Left: <span id="time-left"></span></p>
+      <p id="count-clock">Time Left: <span id="time-left">2:00</span></p>
     </header>
-   
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Graham's Code Quiz Challenge</h5>
-        <p class="card-text">Once you begin the quiz you will have 2 Minutes to complete the quiz! Answering a question correctly will earn you a point towards your highscore. Answering incorrectly will subtract 10 seconds from your remaining time! Good luck!</p>
-        <button href="#" class="btn btn-primary">Click to start</button>
+    
+    <div class="mt-5 container">
+      <div class = "row">
+        <div class="col col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+          <div id="start-card" class="card">
+            <div class= "card-body">
+              <h5 class="card-title">Graham's Code Quiz Challenge</h5>
+              <p class="card-text">Once you begin the quiz you will have 2 Minutes to complete the quiz! Answering a question correctly will earn you a point towards your highscore. Answering incorrectly will subtract 10 seconds from your remaining time! Good luck!</p>
+              <button href="#" class="btn btn-primary">Click to start</button>
+            </div>
+          </div>
+
+          <div id="question-card" class="card">
+            <div class= "card-body">
+              <h5 class="card-title">Question <span id="question-id"></span></h5>
+              <p id="question-text" class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quo quisquam accusamus ut consectetur ducimus?</p>
+              <button href="#" class="btn btn-primary">Click to start</button>
+            </div>
+          </div>
+
+
+        </div>
       </div>
     </div>
+
+
 
 
     <script src="script.js"></script>
