@@ -1,3 +1,5 @@
+
+
 #highscore-link{
   text-align: left;
 }
@@ -16,15 +18,20 @@
   margin-right: auto;
 }
 
+/* .card{
+  outline: solid 3px #3F826D;
+} */
+
 #start-card{
-  display: block;
+  display: none;
   text-align: center;
 }
 
 #question-card{
-  display: none;
+  display: block;
 }
 
 #question-card p{
   text-align: left;
 }
+
