@@ -3,9 +3,11 @@ var questionNumber = 1;
 var correct = 0;
 var incorrect = 0;
 var userName = "";
+var lastQuestion = false;
 
 var questionCardEl = $("#question-card");
 var answerChoiceEls = $(".answer-choice");
+var questionText = $("#question-text");
 
 //initialized an array of question Objects that each contain text, answerChoices[], and correctAnswer properties
 var questionArray = [
@@ -46,8 +48,13 @@ their choice was incorrect.
 function askQuestion(){
   
   //chosing question from questionArray at random
-  var chosenQuestion = questionArray.splice(randomNumber(questionArray.length), 1)[0];
- 
+  if (questionArray.length > 1){
+    var chosenQuestion = questionArray.splice(randomNumber(questionArray.length), 1)[0];
+  } else {
+    var chosenQuestion = questionArray[0];
+    lastQuestion = true;
+  }
+
   //set question number
   $("#question-number").html(questionNumber);
 
@@ -57,24 +64,33 @@ function askQuestion(){
     answerChoiceEls[i].textContent = chosenQuestion.answerChoices.splice(r,1);
   });
 
-
+  questionText.html(chosenQuestion.text);
 
   answerChoiceEls.one("click", function(e){
+
     if (e.target.textContent === chosenQuestion.correctAnswer){
       correct++;
       //CHANGE THIS TO CORRECT MESSAGE FLASH
       console.log("correct!");
-      return;
 
     } else{
       incorrect++;
       timer -= 10;
       //CHANGE THIS TO INCORRECT MESSAGE FLASH
       console.log("Incorrect!");
-      return;
+    }
+
+    if(timer === 0 || lastQuestion === true){
+      return; 
+    } else{
+      console.log(correct);
+      console.log(incorrect);
+      questionNumber++;
+      setTimeout(askQuestion, 5000);
     }
 
   });
+
 
   
   
@@ -82,7 +98,9 @@ function askQuestion(){
 
 
 
-askQuestion();
+askQuestion(0);
+
+
 
 
 
