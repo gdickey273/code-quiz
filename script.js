@@ -30,6 +30,13 @@ var questionArray = [
     answerChoices: ["answer0", "answer1", "answer2", "answer3"],
     correctAnswer: "answer0"
 
+  },
+
+  {
+    text: "Question3 text",
+    answerChoices: ["answer0", "correctAnsw", "answer2", "answer3"],
+    correctAnswer: "correctAnsw"
+
   }
   
 ];
@@ -39,6 +46,7 @@ function randomNumber(max){
   return Math.floor(Math.random()*max);
 }
 
+var chosenQuestion;
 /*splices a random question from questionArray, updates questionCardEl to match random question (with answer options listed in random order), 
 and waits for user to answer. If users chosen answer is correct, correct counter is incremented,
 message flashes below question card to tell user their choice was correct. If the chosen answer is incorrect,
@@ -49,9 +57,9 @@ function askQuestion(){
   
   //chosing question from questionArray at random
   if (questionArray.length > 1){
-    var chosenQuestion = questionArray.splice(randomNumber(questionArray.length), 1)[0];
+    chosenQuestion = questionArray.splice(randomNumber(questionArray.length), 1)[0];
   } else {
-    var chosenQuestion = questionArray[0];
+    chosenQuestion = questionArray[0];
     lastQuestion = true;
   }
 
@@ -66,39 +74,66 @@ function askQuestion(){
 
   questionText.html(chosenQuestion.text);
 
-  answerChoiceEls.one("click", function(e){
+  
+
+  
+  
+}//
+
+
+function takeQuiz(){
+
+  $("#start-card").attr("style", "display: none");
+  questionCardEl.attr("style", "display: block");
+
+  
+
+  askQuestion();
+
+  //console.log elements to ensure they're working properly
+  answerChoiceEls.on("click", function(e){
 
     if (e.target.textContent === chosenQuestion.correctAnswer){
       correct++;
       //CHANGE THIS TO CORRECT MESSAGE FLASH
+      console.log(this.textContent);
+      console.log(chosenQuestion.correctAnswer);
       console.log("correct!");
 
     } else{
       incorrect++;
       timer -= 10;
       //CHANGE THIS TO INCORRECT MESSAGE FLASH
+      console.log(this.textContent);
+      console.log(chosenQuestion.correctAnswer);
       console.log("Incorrect!");
     }
 
+    //create alerts for last question game over vs time out game over to ensure logic is working properly 
     if(timer === 0 || lastQuestion === true){
       return; 
     } else{
       console.log(correct);
       console.log(incorrect);
       questionNumber++;
-      setTimeout(askQuestion, 5000);
+      askQuestion();
     }
 
   });
+}
+
+$("#start-button").on("click", takeQuiz);
 
 
-  
-  
-}//askQuestion()
 
 
 
-askQuestion(0);
+
+
+
+
+
+
 
 
 

@@ -23,12 +23,12 @@
 } */
 
 #start-card{
-  display: none;
+  display: block;
   text-align: center;
 }
 
 #question-card{
-  display: block;
+  display: none;
 }
 
 #question-card p{
