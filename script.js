@@ -9,6 +9,8 @@ var timerEl = $("#time-left").html(timer);
 var questionCardEl = $("#question-card");
 var answerChoiceEls = $(".answer-choice");
 var questionText = $("#question-text");
+var resultAlertEl = $("#result-alert");
+var resultText = $("#result");
 
 //initialized an array of question Objects that each contain text, answerChoices[], and correctAnswer properties
 var questionArray = [
@@ -49,10 +51,7 @@ function randomNumber(max){
 
 var chosenQuestion;
 /*splices a random question from questionArray, updates questionCardEl to match random question (with answer options listed in random order), 
-and waits for user to answer. If users chosen answer is correct, correct counter is incremented,
-message flashes below question card to tell user their choice was correct. If the chosen answer is incorrect,
-incorrect counter is incremented, 10 is subtracted from timer, and a message flashes below questionCard to tell the user 
-their choice was incorrect.
+and waits for user to answer.
 */
 function askQuestion(){
   
@@ -83,10 +82,12 @@ function askQuestion(){
 
 
 function takeQuiz(){
-  $("#count-clock").attr("style", "display: block");
+  //Hide start card and display count clock and question card
   $("#start-card").attr("style", "display: none");
+  $("#count-clock").attr("style", "display: block");
   questionCardEl.attr("style", "display: block");
 
+  //Decrement timer and update counter clock every second until timer reaches 0
   window.setInterval(function(){
     timerEl.html(timer);
     if(timer > 0){
@@ -94,25 +95,38 @@ function takeQuiz(){
     } else clearInterval();
   }, 1000);
 
+  //Update question card with random question
   askQuestion();
 
-  //console.log elements to ensure they're working properly
+  /*Listen for user's click and tests choice against correct answer.  If users chosen answer is correct, correct counter is incremented,
+  message flashes below question card to tell user their choice was correct. If the chosen answer is incorrect,
+  incorrect counter is incremented, 10 is subtracted from timer, and a message flashes below questionCard to tell the user 
+  their choice was incorrect.*/ 
   answerChoiceEls.on("click", function(e){
 
     if (e.target.textContent === chosenQuestion.correctAnswer){
       correct++;
-      //CHANGE THIS TO CORRECT MESSAGE FLASH
-      console.log(this.textContent);
-      console.log(chosenQuestion.correctAnswer);
-      console.log("correct!");
+      
+      //Flashes "Correct!" in div below questionCard for .3 seconds
+      resultText.attr("class", "correct");
+      resultText.html("Correct!");
+      resultAlertEl.attr("style", "display: block");
+      window.setTimeout(function(){resultAlertEl.attr("style", "display: none");}, 300);
+      console.log(resultText);
 
     } else{
       incorrect++;
       timer -= 10;
-      //CHANGE THIS TO INCORRECT MESSAGE FLASH
-      console.log(this.textContent);
-      console.log(chosenQuestion.correctAnswer);
-      console.log("Incorrect!");
+  
+      //Flashes "Wrong!" in div below questionCard for .3 seconds
+      resultText.attr("class", "incorrect");
+      resultText.html("Wrong!");
+      resultAlertEl.attr("style", "display: block");
+      window.setTimeout(function(){resultAlertEl.attr("style", "display: none");}, 300);
+
+
+
+
     }
 
     //create alerts for last question game over vs time out game over to ensure logic is working properly 

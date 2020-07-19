@@ -35,3 +35,12 @@
   text-align: left;
 }
 
+.correct{
+  color: green;
+  text-align: center;
+}
+
+.incorrect{
+  color: red;
+  text-align: center;
+}
