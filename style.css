@@ -5,7 +5,7 @@
 }
 
 #count-clock{
-  display: block;
+  display: none;
   float: right;
   margin-right: 2%;
 }

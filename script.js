@@ -5,6 +5,7 @@ var incorrect = 0;
 var userName = "";
 var lastQuestion = false;
 
+var timerEl = $("#time-left").html(timer);
 var questionCardEl = $("#question-card");
 var answerChoiceEls = $(".answer-choice");
 var questionText = $("#question-text");
@@ -82,11 +83,16 @@ function askQuestion(){
 
 
 function takeQuiz(){
-
+  $("#count-clock").attr("style", "display: block");
   $("#start-card").attr("style", "display: none");
   questionCardEl.attr("style", "display: block");
 
-  
+  window.setInterval(function(){
+    timerEl.html(timer);
+    if(timer > 0){
+      timer--;
+    } else clearInterval();
+  }, 1000);
 
   askQuestion();
 
