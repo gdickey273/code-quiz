@@ -18,10 +18,6 @@
   margin-right: auto;
 }
 
-/* .card{
-  outline: solid 3px #3F826D;
-} */
-
 #start-card{
   display: block;
   text-align: center;
@@ -35,6 +31,10 @@
   text-align: left;
 }
 
+#score-card{
+  display: none;
+}
+
 .correct{
   color: green;
   text-align: center;
@@ -44,3 +44,5 @@
   color: red;
   text-align: center;
 }
+
+

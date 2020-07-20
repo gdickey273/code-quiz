@@ -131,7 +131,8 @@ function takeQuiz(){
 
     //create alerts for last question game over vs time out game over to ensure logic is working properly 
     if(timer === 0 || lastQuestion === true){
-      return; 
+      questionCardEl.attr("style", "display: none"); 
+      $("#score-card").attr("style", "display: block"); 
     } else{
       console.log(correct);
       console.log(incorrect);
