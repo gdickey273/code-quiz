@@ -150,7 +150,7 @@ function takeQuiz() {
 
   });
 
-
+  //once form is submitted create an object. If local storage is empty, create an array of user scores. If such an array already exists push new user score object to that array.
   initialsFormEl.submit(function (e) {
     e.preventDefault();
     var initials = initialsInputEl.val();
