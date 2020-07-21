@@ -6,6 +6,7 @@ var userName = "";
 var lastQuestion = false;
 
 
+
 var timerEl = $("#time-left").html(timer);
 var questionCardEl = $("#question-card");
 var answerChoiceEls = $(".answer-choice");
@@ -139,7 +140,7 @@ function takeQuiz() {
       window.clearInterval(interval);
       timerEl.html(timer);
       $("#final-score").html(timer);
-      
+
     } else {
       console.log(correct);
       console.log(incorrect);
@@ -153,7 +154,16 @@ function takeQuiz() {
   initialsFormEl.submit(function (e) {
     e.preventDefault();
     var initials = initialsInputEl.val();
-    console.log(initials);
+    var highscores = JSON.parse(localStorage.getItem("highscores"));
+    if(highscores !== null){
+      highscores.push({userInitials: initials, userScore: timer});
+    } else{
+     var highscores = [{userInitials: initials, userScore: timer}];
+    }
+
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+    
+    
   });
 }
 
