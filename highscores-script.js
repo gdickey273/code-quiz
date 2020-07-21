@@ -18,5 +18,9 @@ function initializeScores(){
   }
 }
 
+$("#clear-highscores-button").on("click", function(){
+  highscoresListEl.empty();
+  localStorage.removeItem("highscores");
+});
 initializeScores();
 console.log(highscores);
