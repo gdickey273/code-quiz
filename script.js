@@ -4,6 +4,7 @@ var correct = 0;
 var incorrect = 0;
 var userName = "";
 var lastQuestion = false;
+var validInitialChars = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 
 
@@ -82,7 +83,7 @@ function askQuestion() {
 
 
 
-}//
+}
 
 
 function takeQuiz() {
@@ -116,7 +117,7 @@ function takeQuiz() {
       resultText.html("Correct!");
       resultAlertEl.attr("style", "display: block");
       window.setTimeout(function () { resultAlertEl.attr("style", "display: none"); }, 300);
-      console.log(resultText);
+      
 
     } else {
       incorrect++;
@@ -133,7 +134,7 @@ function takeQuiz() {
 
     }
 
-    //create alerts for last question game over vs time out game over to ensure logic is working properly 
+    //If time runs out or lastQuestion was asked, bring up score-card stop timer, and display timer as final score on score-card 
     if (timer === 0 || lastQuestion === true) {
       questionCardEl.attr("style", "display: none");
       $("#score-card").attr("style", "display: block");
@@ -141,29 +142,61 @@ function takeQuiz() {
       timerEl.html(timer);
       $("#final-score").html(timer);
 
+    //else ask another question and iterate question number
     } else {
-      console.log(correct);
-      console.log(incorrect);
       questionNumber++;
       askQuestion();
     }
 
   });
 
-  //once form is submitted create an object. If local storage is empty, create an array of user scores. If such an array already exists push new user score object to that array.
+  //Listens for initialsFormEl submit. If submission is too long, empty, or contains illegal character (anything but A-Z) call alertInvalidInitials()
   initialsFormEl.submit(function (e) {
     e.preventDefault();
+    resultAlertEl.attr("style", "display: none");
     var initials = initialsInputEl.val();
-    var highscores = JSON.parse(localStorage.getItem("highscores"));
-    if(highscores !== null){
-      highscores.push({userInitials: initials, userScore: timer});
-    } else{
-     var highscores = [{userInitials: initials, userScore: timer}];
+    initials.toUpperCase();
+
+    function alertInvalidInitials() {
+      resultText.empty();
+      initialsInputEl.val("");
+      resultAlertEl.attr("style", "display: block").attr("class", "incorrect");
+      $("#invalid-initials-alert").html("Invalid Entry. Please enter up to 3 initials using only letter A-Z");
+
     }
 
-    localStorage.setItem("highscores", JSON.stringify(highscores));
-    window.location ="highscores.html"
-    
+    if (initials.length > 3 || initials.length == 0) {
+      alertInvalidInitials();
+    } else {
+      var containsInvalidChar = false;
+      for (var i = 0; i < initials.length; i++) {
+        if (validInitialChars.indexOf(initials[i]) < 0) {
+          containsInvalidChar = true;
+        }
+      }
+
+      if (containsInvalidChar) {
+        alertInvalidInitials();
+      } else {
+
+        //If local storage is empty, create an array of user scores. If such an array already exists push new user score object to that array.
+        var highscores = JSON.parse(localStorage.getItem("highscores"));
+        if (highscores !== null) {
+          highscores.push({ userInitials: initials, userScore: timer });
+        } else {
+          var highscores = [{ userInitials: initials, userScore: timer }];
+        }
+
+        //save highscore array to local storage and navigate to highscores.html page
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+        window.location = "highscores.html"
+
+      }
+
+
+    }
+
+
   });
 }
 

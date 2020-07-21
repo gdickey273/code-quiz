@@ -33,6 +33,11 @@
 
 #score-card{
   display: none;
+  text-align: left;
+}
+
+#invalid-initials-alert{
+  font-size: 10px;
 }
 
 .correct{
@@ -44,5 +49,7 @@
   color: red;
   text-align: center;
 }
+
+
 
 
