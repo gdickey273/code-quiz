@@ -21,31 +21,37 @@ var initialsInputEl = $("#initials-input");
 //initialized an array of question Objects that each contain text, answerChoices[], and correctAnswer properties
 var questionArray = [
   {
-    text: "Question0 text",
-    answerChoices: ["answer0", "answer1", "answer2", "answer3"],
-    correctAnswer: "answer0"
+    text: "Which one of the below html tags is self closing?",
+    answerChoices: ["<p>", "<img>", "<head>", "<script>"],
+    correctAnswer: "<img>"
 
   },
 
   {
-    text: "Question1 text",
-    answerChoices: ["answer0", "answer1", "answer2", "answer3"],
-    correctAnswer: "answer0"
+    text: "Which variable name below is an example of camel case?",
+    answerChoices: ["variable-name", "vArIaBlEnAmE", "variablename", "variableName"],
+    correctAnswer: "variableName"
 
   },
 
   {
-    text: "Question2 text",
-    answerChoices: ["answer0", "answer1", "answer2", "answer3"],
-    correctAnswer: "answer0"
+    text: "Which of the characters below can be used to call jQuery methods?",
+    answerChoices: ["$", "#", "%", "&"],
+    correctAnswer: "$"
 
   },
 
   {
-    text: "Question3 text",
-    answerChoices: ["answer0", "correctAnsw", "answer2", "answer3"],
-    correctAnswer: "correctAnsw"
+    text: "What does CSS stand for?",
+    answerChoices: ["Central System for Styling", "Cascading Style Sheets", "Can't Stand Sloppyness", "Coding Surely Sells"],
+    correctAnswer: "Cascading Style Sheets"
 
+  },
+
+  {
+    text: "Which below is the name of a popular CSS Framwork?",
+    answerChoices: ["Bootstrap", "Bootbuckle", "Strapstrap", "Brushing his teeth"],
+    correctAnswer: "Bootstrap"
   }
 
 ];
