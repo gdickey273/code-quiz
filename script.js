@@ -4,7 +4,7 @@ var correct = 0;
 var incorrect = 0;
 var userName = "";
 var lastQuestion = false;
-// var initials = "";
+
 
 var timerEl = $("#time-left").html(timer);
 var questionCardEl = $("#question-card");
@@ -44,22 +44,22 @@ var questionArray = [
     correctAnswer: "correctAnsw"
 
   }
-  
+
 ];
 
 //returns a random integer between 0 and max (not including max)
-function randomNumber(max){
-  return Math.floor(Math.random()*max);
+function randomNumber(max) {
+  return Math.floor(Math.random() * max);
 }
 
 var chosenQuestion;
 /*splices a random question from questionArray, updates questionCardEl to match random question (with answer options listed in random order), 
 and waits for user to answer.
 */
-function askQuestion(){
-  
+function askQuestion() {
+
   //chosing question from questionArray at random
-  if (questionArray.length > 1){
+  if (questionArray.length > 1) {
     chosenQuestion = questionArray.splice(randomNumber(questionArray.length), 1)[0];
   } else {
     chosenQuestion = questionArray[0];
@@ -70,32 +70,32 @@ function askQuestion(){
   $("#question-number").html(questionNumber);
 
   //setting answer choices on questionCard to answer choices in question at random
-  $.each($(answerChoiceEls), function(i){
+  $.each($(answerChoiceEls), function (i) {
     var r = randomNumber(chosenQuestion.answerChoices.length);
-    answerChoiceEls[i].textContent = chosenQuestion.answerChoices.splice(r,1);
+    answerChoiceEls[i].textContent = chosenQuestion.answerChoices.splice(r, 1);
   });
 
   questionText.html(chosenQuestion.text);
 
-  
 
-  
-  
+
+
+
 }//
 
 
-function takeQuiz(){
+function takeQuiz() {
   //Hide start card and display count clock and question card
   $("#start-card").attr("style", "display: none");
   $("#count-clock").attr("style", "display: block");
   questionCardEl.attr("style", "display: block");
 
   //Decrement timer and update counter clock every second until timer reaches 0
-  window.setInterval(function(){
+  var interval = window.setInterval(function () {
     timerEl.html(timer);
-    if(timer > 0){
+    if (timer > 0) {
       timer--;
-    } else clearInterval();
+    } else clearInterval(interval);
   }, 1000);
 
   //Update question card with random question
@@ -104,28 +104,28 @@ function takeQuiz(){
   /*Listen for user's click and tests choice against correct answer.  If users chosen answer is correct, correct counter is incremented,
   message flashes below question card to tell user their choice was correct. If the chosen answer is incorrect,
   incorrect counter is incremented, 10 is subtracted from timer, and a message flashes below questionCard to tell the user 
-  their choice was incorrect.*/ 
-  answerChoiceEls.on("click", function(e){
+  their choice was incorrect.*/
+  answerChoiceEls.on("click", function (e) {
 
-    if (e.target.textContent === chosenQuestion.correctAnswer){
+    if (e.target.textContent === chosenQuestion.correctAnswer) {
       correct++;
-      
+
       //Flashes "Correct!" in div below questionCard for .3 seconds
       resultText.attr("class", "correct");
       resultText.html("Correct!");
       resultAlertEl.attr("style", "display: block");
-      window.setTimeout(function(){resultAlertEl.attr("style", "display: none");}, 300);
+      window.setTimeout(function () { resultAlertEl.attr("style", "display: none"); }, 300);
       console.log(resultText);
 
-    } else{
+    } else {
       incorrect++;
       timer -= 10;
-  
+
       //Flashes "Wrong!" in div below questionCard for .3 seconds
       resultText.attr("class", "incorrect");
       resultText.html("Wrong!");
       resultAlertEl.attr("style", "display: block");
-      window.setTimeout(function(){resultAlertEl.attr("style", "display: none");}, 300);
+      window.setTimeout(function () { resultAlertEl.attr("style", "display: none"); }, 300);
 
 
 
@@ -133,10 +133,14 @@ function takeQuiz(){
     }
 
     //create alerts for last question game over vs time out game over to ensure logic is working properly 
-    if(timer === 0 || lastQuestion === true){
-      questionCardEl.attr("style", "display: none"); 
-      $("#score-card").attr("style", "display: block"); 
-    } else{
+    if (timer === 0 || lastQuestion === true) {
+      questionCardEl.attr("style", "display: none");
+      $("#score-card").attr("style", "display: block");
+      window.clearInterval(interval);
+      timerEl.html(timer);
+      $("#final-score").html(timer);
+      
+    } else {
       console.log(correct);
       console.log(incorrect);
       questionNumber++;
@@ -146,7 +150,7 @@ function takeQuiz(){
   });
 
 
-  initialsFormEl.submit(function(e){
+  initialsFormEl.submit(function (e) {
     e.preventDefault();
     var initials = initialsInputEl.val();
     console.log(initials);
