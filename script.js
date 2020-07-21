@@ -162,7 +162,7 @@ function takeQuiz() {
     }
 
     localStorage.setItem("highscores", JSON.stringify(highscores));
-    window.location.href ="highscores.html"
+    window.location ="highscores.html"
     
   });
 }
