@@ -4,6 +4,7 @@ var correct = 0;
 var incorrect = 0;
 var userName = "";
 var lastQuestion = false;
+// var initials = "";
 
 var timerEl = $("#time-left").html(timer);
 var questionCardEl = $("#question-card");
@@ -11,6 +12,8 @@ var answerChoiceEls = $(".answer-choice");
 var questionText = $("#question-text");
 var resultAlertEl = $("#result-alert");
 var resultText = $("#result");
+var initialsFormEl = $("#initials-form");
+var initialsInputEl = $("#initials-input");
 
 //initialized an array of question Objects that each contain text, answerChoices[], and correctAnswer properties
 var questionArray = [
@@ -140,6 +143,13 @@ function takeQuiz(){
       askQuestion();
     }
 
+  });
+
+
+  initialsFormEl.submit(function(e){
+    e.preventDefault();
+    var initials = initialsInputEl.val();
+    console.log(initials);
   });
 }
 
