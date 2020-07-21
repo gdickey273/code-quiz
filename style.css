@@ -1,3 +1,18 @@
+body{
+  background-color: black !important;
+  color: #39ff14 !important;
+  font-family: 'VT323', monospace;
+}
+
+header a, span, p{
+  color: #39ff14;
+}
+
+input{
+  background-color: black;
+  color: #39ff14;
+  border: solid 2px #39ff14;
+}
 
 
 #highscore-link{
@@ -11,11 +26,28 @@
 }
 
 
-
 .col{
   float: left;
   margin-left: auto;
   margin-right: auto;
+}
+
+.btn-primary{
+  background-color: black;
+  color: #39ff14;
+  border: solid 2px #39ff14;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus{
+  background-color: #39ff14 !important;
+  color: black !important;
+  border: solid 2px black !important;
+}
+
+
+.card{
+  background-color: black;
+  border: solid 2px #39ff14;
 }
 
 #start-card{
@@ -41,7 +73,7 @@
 }
 
 .correct{
-  color: green;
+  color:#39ff14;
   text-align: center;
 }
 

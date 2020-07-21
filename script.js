@@ -17,6 +17,7 @@ var resultText = $("#result");
 var initialsFormEl = $("#initials-form");
 var initialsInputEl = $("#initials-input");
 
+
 //initialized an array of question Objects that each contain text, answerChoices[], and correctAnswer properties
 var questionArray = [
   {
