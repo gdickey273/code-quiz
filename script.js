@@ -162,7 +162,7 @@ function takeQuiz() {
     e.preventDefault();
     resultAlertEl.attr("style", "display: none");
     var initials = initialsInputEl.val();
-    initials.toUpperCase();
+    initials = initials.toUpperCase();
 
     function alertInvalidInitials() {
       resultText.empty();
