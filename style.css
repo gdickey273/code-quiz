@@ -36,16 +36,21 @@ input{
   background-color: black;
   color: #39ff14;
   border: solid 2px #39ff14;
-  outline-color: red !important;
+}
+
+.btn-primary:focus{
+  box-shadow: none !important;
 }
 
 .btn:hover, .btn:focus, .btn:active{
   background-color: #39ff14 !important;
   color: black !important;
   border: solid 2px black !important;
-  outline-color: red !important;
+  box-shadow: none !important;
 
 }
+
+
 
 
 
