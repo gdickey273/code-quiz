@@ -15,3 +15,5 @@ If the user tries to enter invalid initials string (one that is longer than 3 or
 ![Highscores](/images/highscores-screenshot.png)
 On the Highscores page the user can either press a button to clear all highscores or click a different button to play again
 
+## Deployed Application
+https://gdickey273.github.io/code-quiz/
